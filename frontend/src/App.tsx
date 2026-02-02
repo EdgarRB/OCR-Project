@@ -42,7 +42,14 @@ function App() {
   };
 
   return (
-    <div className={styles.centerElement}>
+    <div
+      className="min-h-screen flex flex-col items-center justify-center"
+      id="container"
+    >
+      <div
+        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md h-48 mb-6"
+        id="card"
+      ></div>
       <h2>Scrapear imagenes</h2>
       <input
         className={styles.input}
