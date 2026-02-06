@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import ScrapeWeb from "./ScrapeWeb";
 import LoadingProgress from "./LoadingProgress";
 import TextComponent from "./Text";
+import ButtonsSection from "./ButtonsSection";
 
 const Body = () => {
   const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
+  const [showText, setShowText] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   useEffect(() => {
@@ -22,12 +24,12 @@ const Body = () => {
       <div className="max-w-3xl mx-auto px-4 py-8 text-gray-900 flex flex-col gap-8">
         <div className="h-16">
           <h1 className="text-center text-2xl font-semibold">
-            Genera texto a partir de imágenes usando OCR con las distintas
-            opciones soportadas.
+            Generate text from images using OCR with the different supported
+            options.
           </h1>
           <p className="text-center text-gray-600">
-            Soporta imágenes individuales, URLs de páginas web con imágenes y
-            URLs de imágenes directas.
+            It supports individual images, URLs of web pages containing images,
+            and direct image URLs.
           </p>
         </div>
         <div className="relative ">
@@ -37,19 +39,18 @@ const Body = () => {
             <ScrapeWeb handleLoading={setLoading} setText={setText} />
             <LoadingProgress loading={loading} progress={loadingProgress} />
             {text && (
-              <div className="flex flex-row gap-6 justify-items-start p-4">
-                <button className="bg-rose-200 border-2 border-black border-b-4 border-r-4 text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer">
-                  Show text
-                </button>
-                <button className="bg-rose-200 border-2 border-black border-b-4 border-r-4 text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer">
-                  Download
-                </button>
-              </div>
+              <ButtonsSection
+                handlePreviewText={() => setShowText(!showText)}
+              />
             )}
           </div>
         </div>
       </div>
-      <TextComponent text={text} />
+      <TextComponent
+        text={text}
+        show={showText}
+        onClose={() => setShowText(false)}
+      />
     </>
   );
 };

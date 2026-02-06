@@ -28,15 +28,15 @@ const ScrapeWeb = ({ handleLoading, setText }: IScrapeWebProps) => {
       <p className="text-center mt-4">
         Enter a URL of a page or a url from a specific image
       </p>
-      <div className=" w-full flex flex-row gap-2 p-4">
+      <div className="w-full flex flex-row gap-2 p-4 relative">
         <input
           type="text"
           placeholder="Enter URL"
-          className="w-3/4 bg-gray-100 h-10 p-2 border-black border-2 rounded"
+          className="relative z-20 w-full bg-gray-100 h-10 pl-1 border-b-4 border-r-4 border-black border-2 rounded focus:outline-0"
           onChange={(e) => setUrl(e.target.value)}
         />
         <button
-          className="bg-rose-200 h-10 border-2 border-black border-b-4 border-r-4 text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer"
+          className=" bg-rose-200 z-20 h-10 border-2 border-b-4 border-r-4 border-black text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer  transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 "
           onClick={handleScrape}
         >
           Scrape
