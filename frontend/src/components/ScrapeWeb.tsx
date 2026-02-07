@@ -10,6 +10,7 @@ const ScrapeWeb = ({ handleLoading, setText }: IScrapeWebProps) => {
 
   const handleScrape = async () => {
     handleLoading(true);
+    setText("");
 
     const res = await fetch("http://localhost:3001/scrape", {
       method: "POST",

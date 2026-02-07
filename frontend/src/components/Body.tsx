@@ -13,11 +13,19 @@ const Body = () => {
   useEffect(() => {
     if (loading) {
       const interval = setInterval(() => {
-        setLoadingProgress((prev) => (prev >= 100 ? 0 : prev + 20));
+        setLoadingProgress((prev) => (prev >= 100 ? 20 : prev + 20));
       }, 2000);
       return () => clearInterval(interval);
     }
   }, [loading]);
+
+  const updateLoading = (isLoading: boolean) => {
+    setLoading(isLoading);
+    if (!isLoading) {
+      setLoadingProgress(0);
+      setShowText(false);
+    }
+  };
 
   return (
     <>
@@ -36,7 +44,7 @@ const Body = () => {
           <div className="h-64 w-full bg-gray-900 absolute inset-0 rounded-xl translate-y-1 translate-x-1"></div>
           <div className="h-64 bg-amber-100 z-20 border-2 shadow-lg border-black rounded-xl relative flex flex-col">
             {/* Logica para elegir que tipo de generacion de texto elegimos  */}
-            <ScrapeWeb handleLoading={setLoading} setText={setText} />
+            <ScrapeWeb handleLoading={updateLoading} setText={setText} />
             <LoadingProgress loading={loading} progress={loadingProgress} />
             {text && (
               <ButtonsSection
@@ -46,11 +54,9 @@ const Body = () => {
           </div>
         </div>
       </div>
-      <TextComponent
-        text={text}
-        show={showText}
-        onClose={() => setShowText(false)}
-      />
+      {text && showText && (
+        <TextComponent text={text} onClose={() => setShowText(false)} />
+      )}
     </>
   );
 };
