@@ -13,7 +13,7 @@ const Body = () => {
   useEffect(() => {
     if (loading) {
       const interval = setInterval(() => {
-        setLoadingProgress((prev) => (prev >= 100 ? 20 : prev + 20));
+        setLoadingProgress((prev) => (prev >= 7 ? 0 : prev + 1));
       }, 2000);
       return () => clearInterval(interval);
     }
@@ -45,7 +45,7 @@ const Body = () => {
           <div className="h-64 bg-amber-100 z-20 border-2 shadow-lg border-black rounded-xl relative flex flex-col">
             {/* Logica para elegir que tipo de generacion de texto elegimos  */}
             <ScrapeWeb handleLoading={updateLoading} setText={setText} />
-            <LoadingProgress loading={loading} progress={loadingProgress} />
+            {loading && <LoadingProgress progress={loadingProgress} />}
             {text && (
               <ButtonsSection
                 handlePreviewText={() => setShowText(!showText)}

@@ -1,22 +1,34 @@
+import { type JSX } from "react";
+
 interface ILoadingProgressProps {
-  loading: boolean;
   progress: number;
 }
 
-const LoadingProgress = ({ loading, progress }: ILoadingProgressProps) => {
+const LoadingProgress = ({ progress }: ILoadingProgressProps) => {
+  const handleProgressToShow = () => {
+    const divElement = (
+      <div
+        className={`bg-red-400 mt-1 ml-1 h-4 -skew-x-20`}
+        style={{ width: "13%" }}
+      ></div>
+    );
+    if (progress && progress <= 7) {
+      let incrementComponent: JSX.Element[] = [];
+      for (let i = 0; i < progress; i++) {
+        incrementComponent = incrementComponent.concat(divElement);
+      }
+      return incrementComponent;
+    } else {
+      return divElement;
+    }
+  };
+
   return (
-    <>
-      {loading && (
-        <div className="w-full flex items-center justify-center">
-          <div className="w-2/3 bg-orange-200 rounded-sm ">
-            <div
-              className="bg-red-400  text-xs font-medium text-black text-center m-1 leading-none rounded-sm h-4 flex items-center justify-center"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="w-full flex items-center justify-center">
+      <div className="w-2/3 bg-orange-200 rounded flex flex-row h-6 pl-2.5 overflow-hidden">
+        {handleProgressToShow()}
+      </div>
+    </div>
   );
 };
 
