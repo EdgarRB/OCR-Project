@@ -41,14 +41,14 @@ const Body = () => {
           </p>
         </div>
         <div className="relative ">
-          <div className="h-64 w-full bg-gray-900 absolute inset-0 rounded-xl translate-y-1 translate-x-1"></div>
-          <div className="h-64 bg-amber-100 z-20 border-2 shadow-lg border-black rounded-xl relative flex flex-col">
+          <div className="h-64 bg-amber-100 z-20 border-2 border-black rounded-xl relative flex flex-col shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             {/* Logica para elegir que tipo de generacion de texto elegimos  */}
             <ScrapeWeb handleLoading={updateLoading} setText={setText} />
             {loading && <LoadingProgress progress={loadingProgress} />}
             {text && (
               <ButtonsSection
                 handlePreviewText={() => setShowText(!showText)}
+                text={text}
               />
             )}
           </div>

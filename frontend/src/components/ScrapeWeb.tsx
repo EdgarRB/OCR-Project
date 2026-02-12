@@ -33,11 +33,11 @@ const ScrapeWeb = ({ handleLoading, setText }: IScrapeWebProps) => {
         <input
           type="text"
           placeholder="Enter URL"
-          className="relative z-20 w-full bg-gray-100 h-10 pl-1 border-b-4 border-r-4 border-black border-2 rounded focus:outline-0"
+          className="relative z-20 w-full bg-gray-100 h-10 pl-1 border-black border-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] rounded focus:outline-0"
           onChange={(e) => setUrl(e.target.value)}
         />
         <button
-          className=" bg-rose-200 z-20 h-10 border-2 border-b-4 border-r-4 border-black text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer  transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 "
+          className=" bg-rose-200 z-20 h-10 border-2  border-black text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer hover:-translate-y-0.5 hover:-translate-x-0.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
           onClick={handleScrape}
         >
           Scrape

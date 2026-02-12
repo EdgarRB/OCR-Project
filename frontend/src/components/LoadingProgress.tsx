@@ -8,7 +8,7 @@ const LoadingProgress = ({ progress }: ILoadingProgressProps) => {
   const handleProgressToShow = () => {
     const divElement = (
       <div
-        className={`bg-red-400 mt-1 ml-1 h-4 -skew-x-20`}
+        className={`bg-red-400 mt-0.5 ml-1 h-4 -skew-x-20`}
         style={{ width: "13%" }}
       ></div>
     );
@@ -24,8 +24,8 @@ const LoadingProgress = ({ progress }: ILoadingProgressProps) => {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="w-2/3 bg-orange-200 rounded flex flex-row h-6 pl-2.5 overflow-hidden">
+    <div className="w-full flex items-center justify-center ">
+      <div className="w-2/3 bg-orange-200 rounded flex flex-row h-6 pl-2.5 overflow-hidden border-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
         {handleProgressToShow()}
       </div>
     </div>
