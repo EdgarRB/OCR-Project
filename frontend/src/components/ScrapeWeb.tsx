@@ -1,4 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import useScrapeTextApi from "../actions/Scrape";
 
 interface IScrapeWebProps {
   handleLoading: (loading: boolean) => void;
@@ -7,20 +9,20 @@ interface IScrapeWebProps {
 
 const ScrapeWeb = ({ handleLoading, setText }: IScrapeWebProps) => {
   const [url, setUrl] = useState("");
+  const { fetchManual, isFetching, isError } = useScrapeTextApi(url);
+
+  useEffect(() => {
+    handleLoading(isFetching);
+    if (isFetching) {
+      setText("");
+    }
+  }, [isFetching]);
 
   const handleScrape = async () => {
-    handleLoading(true);
-    setText("");
-
-    const res = await fetch("http://localhost:3001/scrape", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url }),
-    });
-
-    const data = await res.json();
-    setText(data.text);
-    handleLoading(false);
+    const result = await fetchManual();
+    if (result) {
+      setText(result.text);
+    }
   };
 
   return (
@@ -38,11 +40,12 @@ const ScrapeWeb = ({ handleLoading, setText }: IScrapeWebProps) => {
         />
         <button
           className=" bg-rose-200 z-20 h-10 border-2  border-black text-gray-800 px-4 py-2 rounded hover:bg-rose-300 cursor-pointer hover:-translate-y-0.5 hover:-translate-x-0.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
-          onClick={handleScrape}
+          onClick={() => handleScrape()}
         >
           Scrape
         </button>
       </div>
+      {isError && <p className="text-center mt-4">Error while scraping</p>}
     </>
   );
 };

@@ -26,7 +26,7 @@ app.post("/scrape", async (req, res) => {
   }
 
   try {
-    /* 1️⃣ Lanzar navegador */
+    /* Lanzar navegador */
     const browser = await puppeteer.launch({
       headless: "new",
     });
@@ -44,7 +44,7 @@ app.post("/scrape", async (req, res) => {
     // Ahora recarga la página para que el cambio tenga efecto
     await page.reload({ waitUntil: "networkidle2" });
 
-    /* 2️⃣ Obtener imágenes */
+    /*Obtener imágenes */
     const imageUrls = await page.evaluate(() => {
       return Array.from(document.images)
         .map((img) => img.src)
@@ -53,7 +53,7 @@ app.post("/scrape", async (req, res) => {
 
     await browser.close();
 
-    /* 3️⃣ OCR */
+    /* OCR */
     let extractedText = "";
 
     const MAX_IMAGES = 20; // Limitar a 20 imágenes para evitar sobrecarga
@@ -76,7 +76,7 @@ app.post("/scrape", async (req, res) => {
       }
     }
 
-    /* 4️⃣ Respuesta */
+    /* Respuesta */
     res.json({
       imagesFound: imageUrls.length,
       imagesProcessed: Math.min(imageUrls.length, MAX_IMAGES),
